@@ -56,6 +56,10 @@ public class BookRepository {
         new DeleteBookAsyncTask(bookDao).execute(book);
     }
 
+    public LiveData<Boolean> isFavorite(String bookTitle) {
+        return bookDao.isFavorite(bookTitle);
+    }
+
     public LiveData<BooksResponse> getBookResponseLiveData() {
         return booksResponseLiveData;
     }

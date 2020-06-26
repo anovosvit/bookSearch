@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.github.anovosvit.searchbook.R;
+import com.github.anovosvit.searchbook.bookinfo.BookInfoViewModel;
 import com.github.anovosvit.searchbook.data.model.VolumeInfo;
 import com.github.anovosvit.searchbook.databinding.FragmentBookCollectionBinding;
 
@@ -28,7 +29,8 @@ import java.util.List;
 
 public class BookCollectionFragment extends Fragment {
 
-    private BookCollectionViewModel bookCollectionViewModel;
+//    private BookCollectionViewModel bookCollectionViewModel;
+    private BookInfoViewModel viewModel;
     private BookCollectionAdapter adapter;
     private RecyclerView recyclerView;
     private FragmentBookCollectionBinding binding;
@@ -37,8 +39,10 @@ public class BookCollectionFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         adapter = new BookCollectionAdapter();
         setHasOptionsMenu(true);
-        bookCollectionViewModel = new ViewModelProvider(this).get(BookCollectionViewModel.class);
-        bookCollectionViewModel.init();
+        viewModel = new ViewModelProvider(this).get(BookInfoViewModel.class);
+        viewModel.init();
+//        bookCollectionViewModel = new ViewModelProvider(this).get(BookCollectionViewModel.class);
+//        bookCollectionViewModel.init();
 
         super.onCreate(savedInstanceState);
     }
@@ -51,13 +55,21 @@ public class BookCollectionFragment extends Fragment {
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
 
-        bookCollectionViewModel.getAllBooks().observe(getViewLifecycleOwner(), new Observer<List<VolumeInfo>>() {
+        viewModel.getAllBooks().observe(getViewLifecycleOwner(), new Observer<List<VolumeInfo>>() {
             @Override
             public void onChanged(List<VolumeInfo> volumeInfos) {
                 adapter.setBooks(volumeInfos);
                 Log.i("BookCollectionFragment", "Получили книги:");
             }
         });
+
+//        bookCollectionViewModel.getAllBooks().observe(getViewLifecycleOwner(), new Observer<List<VolumeInfo>>() {
+//            @Override
+//            public void onChanged(List<VolumeInfo> volumeInfos) {
+//                adapter.setBooks(volumeInfos);
+//                Log.i("BookCollectionFragment", "Получили книги:");
+//            }
+//        });
 
         return binding.getRoot();
     }
@@ -66,7 +78,6 @@ public class BookCollectionFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_collection, menu);
-
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -84,7 +95,8 @@ public class BookCollectionFragment extends Fragment {
     }
 
     private void deleteAllBooks() {
-        bookCollectionViewModel.deleteAllBooks();
+        viewModel.deleteAllBooks();
+//        bookCollectionViewModel.deleteAllBooks();
         binding.textBookcollection.setVisibility(View.VISIBLE);
         binding.textBookcollection.setText("BOOK COLLECTION");
     }

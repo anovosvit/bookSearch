@@ -78,9 +78,9 @@
                                 android:id="@+id/pagesTextView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="20dp"
                                 android:text="@string/pages"
                                 android:textStyle="bold"
+                                android:layout_marginStart="8dp"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -97,28 +97,48 @@
                                 app:layout_constraintStart_toStartOf="@+id/pagesTextView"
                                 app:layout_constraintTop_toBottomOf="@+id/pagesTextView" />
 
-                        <TextView
-                                android:id="@+id/scoreTextView"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="30dp"
-                                android:text="@{String.valueOf(bookInfo.averageRating), default = 0.0}"
-                                android:textStyle="bold"
-                                app:layout_constraintBottom_toBottomOf="@+id/pagesTextView"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="@+id/pagesTextView" />
-
-
                         <RatingBar
                                 android:id="@+id/ratingBarInfo"
                                 style="?android:attr/ratingBarStyleSmall"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:rating="@{bookInfo.averageRating, default = 1.5}"
-                                app:layout_constraintBottom_toBottomOf="@+id/numberOfPagesTextView"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="@+id/scoreTextView"
                                 app:layout_constraintStart_toStartOf="@+id/scoreTextView"
-                                app:layout_constraintTop_toBottomOf="@+id/pagesTextView" />
+                                app:layout_constraintTop_toBottomOf="@+id/scoreTextView" />
+
+                        <TextView
+                                android:id="@+id/scoreTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{String.valueOf(bookInfo.averageRating), default = 0.0}"
+                                android:textStyle="bold"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <TextView
+                                android:id="@+id/textView3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Add to fav"
+                                android:layout_marginEnd="4dp"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageButton
+                                android:id="@+id/appCompatImageButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/ic_baseline_favorite_24"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="@+id/textView3"
+                                app:layout_constraintStart_toStartOf="@+id/textView3"
+                                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>

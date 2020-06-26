@@ -1,11 +1,13 @@
 package com.github.anovosvit.searchbook.bookinfo;
 
 import androidx.databinding.DataBindingUtil;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.util.Log;
@@ -32,25 +34,28 @@ public class BookInfoFragment extends Fragment implements BookItemClickListener 
     private BookInfoViewModel viewModel;
     private BookInfoFragmentBinding binding;
     private static VolumeInfo volumeInfo;
-    private boolean isFavorite = false;
-    private ImageButton favButton, shareButton = null;
+    private boolean isFavorite;
 
     public static BookInfoFragment newInstance() {
         BookInfoFragment bookInfoFragment = new BookInfoFragment();
-        volumeInfo = new VolumeInfo();
         return bookInfoFragment;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-
         viewModel = new ViewModelProvider(this).get(BookInfoViewModel.class);
         super.onCreate(savedInstanceState);
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        viewModel.isFavorite(volumeInfo.getTitle()).observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                isFavorite = aBoolean;
+            }
+        });
 
         binding = DataBindingUtil.inflate(inflater, R.layout.book_info_fragment, container, false);
         binding.setBookInfo(volumeInfo);
@@ -70,22 +75,11 @@ public class BookInfoFragment extends Fragment implements BookItemClickListener 
     @Override
     public void onBookItemClick(VolumeInfo volumeInfo) {
         this.volumeInfo = volumeInfo;
-        Log.i("Fragment", "проброс в фрагмент" + this.volumeInfo.getTitle());
     }
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_book_info, menu);
-        MenuItem favItem = menu.findItem(R.id.favoriteEvent);
-        MenuItem shareItem = menu.findItem(R.id.eventShare);
-
-        if (favItem != null) {
-            favButton = (ImageButton) favItem.getActionView();
-        }
-
-        if (shareItem != null) {
-            shareButton = (ImageButton) shareItem.getActionView();
-        }
 
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -93,15 +87,6 @@ public class BookInfoFragment extends Fragment implements BookItemClickListener 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.favoriteEvent:
-                if (!isFavorite) {
-                    addToFavorite(volumeInfo);
-                    item.setIcon(R.drawable.ic_baseline_favorite_active_24);
-                } else {
-                    deleteBook(volumeInfo);
-                    item.setIcon(R.drawable.ic_baseline_favorite_24);
-                }
-                return true;
             case R.id.eventShare:
                 share();
                 return false;
@@ -113,8 +98,8 @@ public class BookInfoFragment extends Fragment implements BookItemClickListener 
 
     private void deleteBook(VolumeInfo volumeInfo) {
         viewModel.deleteBook(volumeInfo);
-        isFavorite = false;
         Toast.makeText(getContext(), getString(R.string.delete_fav), Toast.LENGTH_SHORT).show();
+
     }
 
     private void share() {
@@ -123,8 +108,6 @@ public class BookInfoFragment extends Fragment implements BookItemClickListener 
 
     private void addToFavorite(VolumeInfo book) {
         viewModel.addToFavorite(book);
-        isFavorite = true;
         Toast.makeText(getContext(), getString(R.string.add_to_fav), Toast.LENGTH_SHORT).show();
     }
-
 }
