@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+                name="bookItem"
+                type="com.github.anovosvit.searchbook.data.model.VolumeInfo" />
+
+        <variable
+                name="itemClickListener"
+                type="android.view.View.OnClickListener" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="175dp"
+            android:onClick="@{itemClickListener}"
+            android:orientation="vertical">
+
+        <ImageView
+                android:id="@+id/containerImageView"
+                android:layout_width="0dp"
+                android:layout_height="135dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/container"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+                android:id="@+id/coverImageView"
+                android:layout_width="100dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_editor_absoluteX="46dp"
+                app:srcCompat="@drawable/cover" />
+
+        <TextView
+                android:id="@+id/bookTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:singleLine="true"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/containerImageView"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/coverImageView"
+                app:layout_constraintTop_toTopOf="@+id/containerImageView"
+                tools:text="@{bookItem.title, default = not_found}" />
+
+        <TextView
+                android:id="@+id/authorName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                app:layout_constraintEnd_toEndOf="@+id/containerImageView"
+                app:layout_constraintStart_toEndOf="@+id/coverImageView"
+                app:layout_constraintTop_toBottomOf="@+id/bookTitle"
+                tools:text="@{bookItem.author, default = not_found}" />
+
+        <RatingBar
+                android:id="@+id/ratingBar"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="#FF7043"
+                android:rating="@{bookItem.averageRating, default = 1.5}"
+                app:layout_constraintStart_toEndOf="@+id/coverImageView"
+                app:layout_constraintTop_toBottomOf="@+id/authorName" />
+
+        <TextView
+                android:id="@+id/score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@{String.valueOf(bookItem.averageRating), default = 0.0}"
+                app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
+                app:layout_constraintStart_toEndOf="@+id/ratingBar"
+                app:layout_constraintTop_toTopOf="@+id/ratingBar" />
+
+        <TextView
+                android:id="@+id/pages"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/coverImageView"
+                app:layout_constraintStart_toEndOf="@+id/coverImageView"
+                app:layout_constraintTop_toBottomOf="@+id/ratingBar"
+                app:layout_constraintVertical_bias="1.0"
+                tools:text="@{String.valueOf(bookItem.pageCount), default = 0000}" />
+
+        <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="pages"
+                app:layout_constraintBottom_toBottomOf="@+id/pages"
+                app:layout_constraintStart_toEndOf="@+id/pages"
+                app:layout_constraintTop_toTopOf="@+id/pages" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

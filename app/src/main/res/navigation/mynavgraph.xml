@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/mynavgraph"
+        app:startDestination="@id/bookSearchFragment">
+
+    <fragment
+            android:id="@+id/bookSearchFragment"
+            android:name="com.github.anovosvit.searchbook.booksearch.BookSearchFragment"
+            tools:layout="@layout/fragment_booksearch"
+            android:label="Search Book" >
+        <action
+                android:id="@+id/action_bookSearchFragment_to_bookInfoFragment"
+                app:destination="@id/bookInfoFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/bookInfoFragment"
+            android:name="com.github.anovosvit.searchbook.bookinfo.BookInfoFragment"
+            android:label="Book Info"
+            tools:layout="@layout/book_info_fragment" />
+    <fragment
+            android:id="@+id/bookCollectionFragment"
+            android:name="com.github.anovosvit.searchbook.bookcollection.BookCollectionFragment"
+            android:label="Book Collection"
+            tools:layout="@layout/fragment_book_collection" >
+        <action
+                android:id="@+id/action_bookCollectionFragment_to_bookInfoFragment"
+                app:destination="@id/bookInfoFragment" />
+    </fragment>
+
+</navigation>

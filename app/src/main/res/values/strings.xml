@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Book search</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--    For views   -->
+    <string name="title_book_list">Books</string>
+    <string name="title_book_detail">Book Detail</string>
+    <string name="authors">Authors:</string>
+    <string name="print_type">Print type:</string>
+    <string name="published_date">Published date:</string>
+    <string name="publisher">Publisher:</string>
+    <string name="categories">Categories:</string>
+    <string name="pages">Pages</string>
+
+    <string name="no_such_book">"Something went wrong, try again later"</string>
+    <string name="add_to_fav">Book successfully added to your collection</string>
+    <string name="delete_fav">Book successfully removed from your collection</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Book Application</string>
+    <string name="nav_header_subtitle">github.com/anovosvit</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="query_hint">Enter book or author</string>
+
+</resources>
