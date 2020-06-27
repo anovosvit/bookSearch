@@ -29,20 +29,17 @@ import java.util.List;
 
 public class BookCollectionFragment extends Fragment {
 
-//    private BookCollectionViewModel bookCollectionViewModel;
     private BookInfoViewModel viewModel;
     private BookCollectionAdapter adapter;
+
     private RecyclerView recyclerView;
     private FragmentBookCollectionBinding binding;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        adapter = new BookCollectionAdapter();
+        adapter = BookCollectionAdapter.getInstance();
         setHasOptionsMenu(true);
         viewModel = new ViewModelProvider(this).get(BookInfoViewModel.class);
-        viewModel.init();
-//        bookCollectionViewModel = new ViewModelProvider(this).get(BookCollectionViewModel.class);
-//        bookCollectionViewModel.init();
 
         super.onCreate(savedInstanceState);
     }
@@ -55,21 +52,10 @@ public class BookCollectionFragment extends Fragment {
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
 
-        viewModel.getAllBooks().observe(getViewLifecycleOwner(), new Observer<List<VolumeInfo>>() {
-            @Override
-            public void onChanged(List<VolumeInfo> volumeInfos) {
-                adapter.setBooks(volumeInfos);
-                Log.i("BookCollectionFragment", "Получили книги:");
-            }
+        viewModel.getAllBooks().observe(getViewLifecycleOwner(), volumeInfos -> {
+            adapter.setBooks(volumeInfos);
+            adapter.notifyDataSetChanged();
         });
-
-//        bookCollectionViewModel.getAllBooks().observe(getViewLifecycleOwner(), new Observer<List<VolumeInfo>>() {
-//            @Override
-//            public void onChanged(List<VolumeInfo> volumeInfos) {
-//                adapter.setBooks(volumeInfos);
-//                Log.i("BookCollectionFragment", "Получили книги:");
-//            }
-//        });
 
         return binding.getRoot();
     }
@@ -81,22 +67,17 @@ public class BookCollectionFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_delete:
-                deleteAllBooks();
-                return true;
-            default:
-                break;
+        if (item.getItemId() == R.id.action_delete) {
+            deleteAllBooks();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     private void deleteAllBooks() {
         viewModel.deleteAllBooks();
-//        bookCollectionViewModel.deleteAllBooks();
         binding.textBookcollection.setVisibility(View.VISIBLE);
         binding.textBookcollection.setText("BOOK COLLECTION");
     }

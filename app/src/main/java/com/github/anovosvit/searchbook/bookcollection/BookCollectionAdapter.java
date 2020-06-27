@@ -22,6 +22,7 @@ import java.util.List;
 public class BookCollectionAdapter extends RecyclerView.Adapter<BookCollectionAdapter.BookCollectionViewHolder> {
 
     private List<VolumeInfo> books = new ArrayList<>();
+    private static BookCollectionAdapter instance;
 
     public List<VolumeInfo> getBooks() {
         return books;
@@ -29,7 +30,13 @@ public class BookCollectionAdapter extends RecyclerView.Adapter<BookCollectionAd
 
     public void setBooks(List<VolumeInfo> books) {
         this.books = books;
-        notifyDataSetChanged();
+    }
+
+    public static BookCollectionAdapter getInstance() {
+        if (instance == null) {
+            instance = new BookCollectionAdapter();
+        }
+        return instance;
     }
 
     @NonNull

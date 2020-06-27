@@ -1,11 +1,13 @@
 package com.github.anovosvit.searchbook.bookinfo;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.github.anovosvit.searchbook.bookcollection.BookCollectionAdapter;
 import com.github.anovosvit.searchbook.data.BookRepository;
 import com.github.anovosvit.searchbook.data.model.VolumeInfo;
 
@@ -19,9 +21,6 @@ public class BookInfoViewModel extends AndroidViewModel {
     public BookInfoViewModel(@NonNull Application application) {
         super(application);
         repository = BookRepository.getInstance(application);
-    }
-
-    public void init() {
         allBooks = repository.getAll();
     }
 

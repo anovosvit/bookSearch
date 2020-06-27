@@ -28,5 +28,4 @@ public interface BookDao {
 
     @Delete
     void deleteBook(VolumeInfo book);
-
 }

@@ -24,6 +24,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.github.anovosvit.searchbook.R;
+import com.github.anovosvit.searchbook.bookcollection.BookCollectionAdapter;
 import com.github.anovosvit.searchbook.booksearch.BookSearchViewModel;
 import com.github.anovosvit.searchbook.databinding.BookInfoFragmentBinding;
 import com.github.anovosvit.searchbook.data.model.VolumeInfo;
@@ -50,17 +51,17 @@ public class BookInfoFragment extends Fragment implements BookItemClickListener 
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        viewModel.isFavorite(volumeInfo.getTitle()).observe(getViewLifecycleOwner(), aBoolean -> isFavorite = aBoolean);
+        viewModel.isFavorite(volumeInfo.getTitle()).observe(getViewLifecycleOwner(), aBoolean -> {
+            isFavorite = aBoolean;
+            if (isFavorite) {
+                binding.favoritesButton.setImageResource(R.drawable.ic_baseline_favorite_active_24);
+            } else {
+                binding.favoritesButton.setImageResource(R.drawable.ic_baseline_favorite_24);
+            }
+        });
 
         binding = DataBindingUtil.inflate(inflater, R.layout.book_info_fragment, container, false);
         binding.setBookInfo(volumeInfo);
-
-        if (isFavorite) {
-            binding.favoritesButton.setImageResource(R.drawable.ic_baseline_favorite_active_24);
-        } else {
-            binding.favoritesButton.setImageResource(R.drawable.ic_baseline_favorite_24);
-        }
-
 
         if (volumeInfo.getImageLink() != null) {
             String imageUrl = volumeInfo.getImageLink();
@@ -71,15 +72,11 @@ public class BookInfoFragment extends Fragment implements BookItemClickListener 
                     .into(binding.coverBookImageView);
         }
 
-
-
         binding.favoritesButton.setOnClickListener(v -> {
             if (!isFavorite) {
                 addToFavorite(volumeInfo);
-                binding.favoritesButton.setImageResource(R.drawable.ic_baseline_favorite_active_24);
             } else {
                 deleteBook(volumeInfo);
-                binding.favoritesButton.setImageResource(R.drawable.ic_baseline_favorite_24);
             }
         });
 
@@ -94,7 +91,6 @@ public class BookInfoFragment extends Fragment implements BookItemClickListener 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_book_info, menu);
-
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -110,7 +106,7 @@ public class BookInfoFragment extends Fragment implements BookItemClickListener 
     private void deleteBook(VolumeInfo volumeInfo) {
         viewModel.deleteBook(volumeInfo);
         Toast.makeText(getContext(), getString(R.string.delete_fav), Toast.LENGTH_SHORT).show();
-
+        binding.favoritesButton.setImageResource(R.drawable.ic_baseline_favorite_24);
     }
 
     private void share() {
@@ -120,5 +116,6 @@ public class BookInfoFragment extends Fragment implements BookItemClickListener 
     private void addToFavorite(VolumeInfo book) {
         viewModel.addToFavorite(book);
         Toast.makeText(getContext(), getString(R.string.add_to_fav), Toast.LENGTH_SHORT).show();
+        binding.favoritesButton.setImageResource(R.drawable.ic_baseline_favorite_active_24);
     }
 }
