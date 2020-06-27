@@ -50,15 +50,17 @@ public class BookInfoFragment extends Fragment implements BookItemClickListener 
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        viewModel.isFavorite(volumeInfo.getTitle()).observe(getViewLifecycleOwner(), new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                isFavorite = aBoolean;
-            }
-        });
+        viewModel.isFavorite(volumeInfo.getTitle()).observe(getViewLifecycleOwner(), aBoolean -> isFavorite = aBoolean);
 
         binding = DataBindingUtil.inflate(inflater, R.layout.book_info_fragment, container, false);
         binding.setBookInfo(volumeInfo);
+
+        if (isFavorite) {
+            binding.favoritesButton.setImageResource(R.drawable.ic_baseline_favorite_active_24);
+        } else {
+            binding.favoritesButton.setImageResource(R.drawable.ic_baseline_favorite_24);
+        }
+
 
         if (volumeInfo.getImageLink() != null) {
             String imageUrl = volumeInfo.getImageLink();
@@ -69,12 +71,24 @@ public class BookInfoFragment extends Fragment implements BookItemClickListener 
                     .into(binding.coverBookImageView);
         }
 
+
+
+        binding.favoritesButton.setOnClickListener(v -> {
+            if (!isFavorite) {
+                addToFavorite(volumeInfo);
+                binding.favoritesButton.setImageResource(R.drawable.ic_baseline_favorite_active_24);
+            } else {
+                deleteBook(volumeInfo);
+                binding.favoritesButton.setImageResource(R.drawable.ic_baseline_favorite_24);
+            }
+        });
+
         return binding.getRoot();
     }
 
     @Override
     public void onBookItemClick(VolumeInfo volumeInfo) {
-        this.volumeInfo = volumeInfo;
+        BookInfoFragment.volumeInfo = volumeInfo;
     }
 
     @Override
@@ -86,12 +100,9 @@ public class BookInfoFragment extends Fragment implements BookItemClickListener 
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.eventShare:
-                share();
-                return false;
-            default:
-                break;
+        if (item.getItemId() == R.id.eventShare) {
+            share();
+            return false;
         }
         return super.onOptionsItemSelected(item);
     }

@@ -141,17 +141,17 @@ public class VolumeInfo {
 
     public String getAuthor() {
         String result = null;
-        if (getAuthorsString() != null) {
-            result = getAuthorsString();
+        if (authors != null) {
+            return getAuthorsString();
         } else {
             result = this.author;
         }
-        return author;
+        return result;
     }
 
     public String getCategory() {
-        if (getCategoriesString() != null) {
-            category = getCategoriesString();
+        if (categories != null) {
+            return getCategoriesString();
         }
         return category;
     }
