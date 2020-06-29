@@ -28,7 +28,7 @@
                 android:textSize="18sp" />
 
         <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/fragment_booksearch_searchResultsRecyclerView"
+                android:id="@+id/bookSearchRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
@@ -41,6 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:padding="8dp"
+                android:contentDescription="@string/title_book_list"
                 android:scaleType="centerCrop"
                 android:src="@drawable/books" />
 

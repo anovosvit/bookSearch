@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-            android:id="@+id/action_delete"
+            android:id="@+id/deleteAction"
             android:icon="@drawable/ic_baseline_delete_24"
-            android:title="Delete all books"
+            android:title="@string/delete_all_books"
             />
 
 </menu>

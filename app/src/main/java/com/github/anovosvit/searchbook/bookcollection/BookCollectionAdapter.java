@@ -13,7 +13,6 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.github.anovosvit.searchbook.R;
 import com.github.anovosvit.searchbook.bookinfo.BookInfoCollectionFragment;
-import com.github.anovosvit.searchbook.bookinfo.BookInfoFragment;
 import com.github.anovosvit.searchbook.databinding.ItemCollectionBinding;
 import com.github.anovosvit.searchbook.data.model.VolumeInfo;
 

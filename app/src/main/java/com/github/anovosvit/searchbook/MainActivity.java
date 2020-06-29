@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
     private NavController navController;
     private AppBarConfiguration mAppBarConfiguration;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,9 +28,9 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.navView);
 
-        navController = Navigation.findNavController(this, R.id.activity_main_navhostfragment);
+        navController = Navigation.findNavController(this, R.id.activityMainNavHostFragment);
         mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.bookSearchFragment, R.id.bookCollectionFragment)
                 .setDrawerLayout(drawer)
                 .build();
@@ -39,20 +38,9 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
-    private void removeBook() {
-//        mData.remove(1);
-//        adapter.notifyItemRemoved(1);
-    }
-
-    private void addBook() {
-//        Book book = new Book(R.drawable.king);
-//        mData.add(1, book);
-//        adapter.notifyItemInserted(1);
-    }
-
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.activity_main_navhostfragment);
+        NavController navController = Navigation.findNavController(this, R.id.activityMainNavHostFragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }

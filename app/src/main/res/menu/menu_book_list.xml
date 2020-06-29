@@ -4,9 +4,9 @@
         xmlns:tools="http://schemas.android.com/tools"
         tools:context=".BookSearchFragment">
     <item
-            android:id="@+id/action_search"
+            android:id="@+id/searchAction"
             android:icon="@android:drawable/ic_menu_search"
-            android:title="Search"
+            android:title="@string/search"
             app:actionViewClass="androidx.appcompat.widget.SearchView"
             app:showAsAction="always" />
 

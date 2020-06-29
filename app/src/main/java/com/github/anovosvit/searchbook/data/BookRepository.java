@@ -7,7 +7,6 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.github.anovosvit.searchbook.bookcollection.BookCollectionAdapter;
 import com.github.anovosvit.searchbook.data.database.BookDao;
 import com.github.anovosvit.searchbook.data.database.BookRoomDatabase;
 import com.github.anovosvit.searchbook.data.http.Model;

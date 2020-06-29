@@ -9,7 +9,7 @@
             tools:context=".bookcollection.BookCollectionFragment">
 
         <TextView
-                android:id="@+id/text_bookcollection"
+                android:id="@+id/bookCollectionInfoText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -31,7 +31,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
             <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/collection_recyclerView"
+                    android:id="@+id/collectionRecyclerView"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:padding="8dp"
@@ -39,7 +39,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_bookcollection"
+                    app:layout_constraintTop_toBottomOf="@+id/bookCollectionInfoText"
                     app:spanCount="2"
                     tools:listitem="@layout/item_collection" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

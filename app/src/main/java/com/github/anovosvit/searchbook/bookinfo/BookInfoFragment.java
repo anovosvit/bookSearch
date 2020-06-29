@@ -7,10 +7,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,16 +21,12 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.github.anovosvit.searchbook.R;
-import com.github.anovosvit.searchbook.bookcollection.BookCollectionAdapter;
 import com.github.anovosvit.searchbook.databinding.BookInfoFragmentBinding;
 import com.github.anovosvit.searchbook.data.model.VolumeInfo;
-import com.github.anovosvit.searchbook.recyclerview.BookItemClickListener;
-
-import java.util.List;
 
 public class BookInfoFragment extends Fragment implements BookItemClickListener {
 
-    private BookInfoViewModel viewModel;
+    private BookItemViewModel viewModel;
     private BookInfoFragmentBinding binding;
     private static VolumeInfo volumeInfo;
     private boolean isFavorite;
@@ -45,12 +39,16 @@ public class BookInfoFragment extends Fragment implements BookItemClickListener 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        viewModel = new ViewModelProvider(this).get(BookInfoViewModel.class);
+        viewModel = new ViewModelProvider(this).get(BookItemViewModel.class);
         super.onCreate(savedInstanceState);
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        binding = DataBindingUtil.inflate(inflater, R.layout.book_info_fragment, container, false);
+        binding.setBookInfo(volumeInfo);
+
         viewModel.isFavorite(volumeInfo.getTitle()).observe(getViewLifecycleOwner(), aBoolean -> {
             isFavorite = aBoolean;
             if (isFavorite) {
@@ -60,20 +58,6 @@ public class BookInfoFragment extends Fragment implements BookItemClickListener 
             }
         });
 
-        viewModel.getAllFavBooks().observe(getViewLifecycleOwner(), new Observer<List<VolumeInfo>>() {
-            @Override
-            public void onChanged(List<VolumeInfo> volumeInfos) {
-                if (volumeInfos != null || volumeInfos.size() != 0) {
-                    BookCollectionAdapter.getInstance().setBooks(volumeInfos);
-                    BookCollectionAdapter.getInstance().notifyDataSetChanged();
-                }
-            }
-        });
-
-
-        binding = DataBindingUtil.inflate(inflater, R.layout.book_info_fragment, container, false);
-        binding.setBookInfo(volumeInfo);
-
         if (volumeInfo.getImageLink() != null) {
             String imageUrl = volumeInfo.getImageLink();
 
@@ -82,14 +66,6 @@ public class BookInfoFragment extends Fragment implements BookItemClickListener 
                     .transform(new CenterCrop(), new RoundedCorners(16))
                     .into(binding.coverBookImageView);
         }
-
-//        binding.favoritesButton.setOnClickListener(v -> {
-//            if (!isFavorite) {
-//                addToFavorite(volumeInfo);
-//            } else {
-//                deleteBook(volumeInfo);
-//            }
-//        });
 
         return binding.getRoot();
     }
@@ -113,14 +89,9 @@ public class BookInfoFragment extends Fragment implements BookItemClickListener 
                 return false;
             case R.id.addToCollection:
                 addToFavorite(volumeInfo);
+                return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void deleteBook(VolumeInfo volumeInfo) {
-        viewModel.deleteSelectedBook(volumeInfo);
-        Toast.makeText(getContext(), getString(R.string.delete_fav), Toast.LENGTH_SHORT).show();
-        binding.favoritesButton.setImageResource(R.drawable.ic_baseline_favorite_24);
     }
 
     private void share() {
@@ -128,8 +99,12 @@ public class BookInfoFragment extends Fragment implements BookItemClickListener 
     }
 
     private void addToFavorite(VolumeInfo book) {
-        viewModel.addToFavorite(book);
-        Toast.makeText(getContext(), getString(R.string.add_to_fav), Toast.LENGTH_SHORT).show();
-        binding.favoritesButton.setImageResource(R.drawable.ic_baseline_favorite_active_24);
+        if (!isFavorite) {
+            viewModel.addToFavorite(book);
+            Toast.makeText(getContext(), getString(R.string.add_to_fav), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getContext(), getString(R.string.add_error_message), Toast.LENGTH_SHORT).show();
+        }
+
     }
 }

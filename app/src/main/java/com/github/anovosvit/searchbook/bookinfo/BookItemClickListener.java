@@ -1,4 +1,4 @@
-package com.github.anovosvit.searchbook.recyclerview;
+package com.github.anovosvit.searchbook.bookinfo;
 
 import com.github.anovosvit.searchbook.data.model.VolumeInfo;
 
