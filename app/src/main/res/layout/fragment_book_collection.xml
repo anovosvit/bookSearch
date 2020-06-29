@@ -20,21 +20,29 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="BOOK COLLECTION" />
+                tools:text="@string/empty_book_collection" />
 
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/collection_recyclerView"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:padding="8dp"
-                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipeToRefresh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_bookcollection"
-                app:spanCount="2"
-                tools:listitem="@layout/item_collection" />
+                app:layout_constraintTop_toTopOf="parent">
 
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/collection_recyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:padding="8dp"
+                    app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_bookcollection"
+                    app:spanCount="2"
+                    tools:listitem="@layout/item_collection" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.github.anovosvit.searchbook.R;
+import com.github.anovosvit.searchbook.bookinfo.BookInfoCollectionFragment;
 import com.github.anovosvit.searchbook.bookinfo.BookInfoFragment;
 import com.github.anovosvit.searchbook.databinding.ItemCollectionBinding;
 import com.github.anovosvit.searchbook.data.model.VolumeInfo;
@@ -63,8 +64,8 @@ public class BookCollectionAdapter extends RecyclerView.Adapter<BookCollectionAd
         }
 
         holder.itemBinding.setItemClickListener(v -> {
-            BookInfoFragment.newInstance().onBookItemClick(book);
-            Navigation.findNavController(v).navigate(R.id.bookInfoFragment);
+            BookInfoCollectionFragment.newInstance().onBookItemClick(book);
+            Navigation.findNavController(v).navigate(R.id.bookInfoCollectionFragment);
         });
     }
 

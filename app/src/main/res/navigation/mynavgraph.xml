@@ -24,9 +24,16 @@
             android:name="com.github.anovosvit.searchbook.bookcollection.BookCollectionFragment"
             android:label="Book Collection"
             tools:layout="@layout/fragment_book_collection" >
+
         <action
-                android:id="@+id/action_bookCollectionFragment_to_bookInfoFragment"
-                app:destination="@id/bookInfoFragment" />
+                android:id="@+id/action_bookCollectionFragment_to_bookInfoCollectionFragment"
+                app:destination="@id/bookInfoCollectionFragment" />
     </fragment>
+
+    <fragment
+            android:id="@+id/bookInfoCollectionFragment"
+            android:name="com.github.anovosvit.searchbook.bookinfo.BookInfoCollectionFragment"
+            android:label="Book Info Collection"
+            tools:layout="@layout/book_info_fragment" />
 
 </navigation>

@@ -15,22 +15,19 @@ import java.util.List;
 
 public class BookCollectionViewModel extends AndroidViewModel {
     private BookRepository repository;
-    private LiveData<List<VolumeInfo>> allBooks;
+    private LiveData<List<VolumeInfo>> allFavBooks;
 
     public BookCollectionViewModel(@NonNull Application application) {
         super(application);
         repository = BookRepository.getInstance(application);
+        allFavBooks = repository.getAll();
     }
 
-    public void init() {
-        allBooks = repository.getAll();
+    public LiveData<List<VolumeInfo>> getAllFavBooks() {
+        return allFavBooks;
     }
 
-    public LiveData<List<VolumeInfo>> getAllBooks() {
-        return allBooks;
-    }
-
-    public void deleteAllBooks(){
+    public void deleteAllFavBooks(){
         repository.deleteAll();
     }
 }
