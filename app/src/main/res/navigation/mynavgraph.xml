@@ -36,4 +36,10 @@
             android:label="Book Info Collection"
             tools:layout="@layout/book_info_fragment" />
 
+    <fragment
+            android:id="@+id/feedbackFragment"
+            android:name="com.github.anovosvit.searchbook.feedback.FeedbackFragment"
+            android:label="Feedback"
+            tools:layout="@layout/fragment_feedback" />
+
 </navigation>

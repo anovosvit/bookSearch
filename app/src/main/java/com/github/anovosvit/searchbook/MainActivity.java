@@ -29,9 +29,10 @@ public class MainActivity extends AppCompatActivity {
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.navView);
+        navigationView.setItemIconTintList(null);
 
         navController = Navigation.findNavController(this, R.id.activityMainNavHostFragment);
-        mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.bookSearchFragment, R.id.bookCollectionFragment)
+        mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.bookSearchFragment, R.id.bookCollectionFragment, R.id.feedbackFragment)
                 .setDrawerLayout(drawer)
                 .build();
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);

@@ -3,15 +3,35 @@
         xmlns:tools="http://schemas.android.com/tools"
         tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
-        <item
-                android:id="@+id/bookSearchFragment"
-                android:icon="@android:drawable/ic_menu_search"
-                android:title="Search Book" />
+    <item android:title="">
+        <menu>
+        </menu>
+    </item>
+    <item android:title="@string/general">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                        android:id="@+id/bookSearchFragment"
+                        android:icon="@drawable/ic_search"
+                        android:title="@string/search_book" />
 
-        <item
-                android:id="@+id/bookCollectionFragment"
-                android:icon="@drawable/ic_baseline_share_24"
-                android:title="Book Collection" />
-    </group>
+                <item
+                        android:id="@+id/bookCollectionFragment"
+                        android:icon="@drawable/ic_book"
+                        android:title="@string/book_collection" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="Communicate">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                        android:id="@+id/feedbackFragment"
+                        android:icon="@drawable/ic_send"
+                        android:title="@string/feedback" />
+            </group>
+        </menu>
+    </item>
+
 </menu>

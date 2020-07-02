@@ -38,9 +38,11 @@
                 android:layout_height="150dp"
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="8dp"
+                android:contentDescription="@string/book_cover_content_description"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_editor_absoluteX="46dp"
+                android:scaleType="fitCenter"
                 app:srcCompat="@drawable/cover" />
 
         <TextView
@@ -113,7 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="pages"
+                android:text="@string/pages"
                 app:layout_constraintBottom_toBottomOf="@+id/pages"
                 app:layout_constraintStart_toEndOf="@+id/pages"
                 app:layout_constraintTop_toTopOf="@+id/pages" />

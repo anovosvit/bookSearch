@@ -3,6 +3,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/drawer_layout"
+        style="@style/ThemeOverlay.AppCompat.navTheme"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
@@ -36,8 +37,9 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
+            android:clipToPadding="false"
             android:fitsSystemWindows="true"
-            style="@style/ThemeOverlay.AppCompat.navTheme"
             app:headerLayout="@layout/nav_header_main"
+            android:theme="@style/ThemeOverlay.AppCompat.navTheme"
             app:menu="@menu/activity_main_drawer" />
 </androidx.drawerlayout.widget.DrawerLayout>
