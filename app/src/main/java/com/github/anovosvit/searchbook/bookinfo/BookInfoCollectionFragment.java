@@ -1,5 +1,7 @@
 package com.github.anovosvit.searchbook.bookinfo;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -30,8 +32,7 @@ public class BookInfoCollectionFragment extends Fragment implements BookItemClic
     private boolean isFavorite;
 
     public static BookInfoCollectionFragment newInstance() {
-        BookInfoCollectionFragment bookInfoCollectionFragment = new BookInfoCollectionFragment();
-        return bookInfoCollectionFragment;
+        return new BookInfoCollectionFragment();
     }
 
     @Override
@@ -85,16 +86,28 @@ public class BookInfoCollectionFragment extends Fragment implements BookItemClic
             case R.id.removeFromCollection:
                 deleteBook();
                 return true;
-
             case R.id.eventShare:
                 share();
-                return false;
+                return true;
+            case R.id.readBook:
+                goToRead();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    private void goToRead() {
+        Intent readBookIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(volumeInfo.getPreviewLink()));
+        startActivity(readBookIntent);
+    }
+
     private void share() {
-        Toast.makeText(getContext(), "Share", Toast.LENGTH_SHORT).show();
+        Intent myShareIntent = new Intent();
+        myShareIntent.setAction(Intent.ACTION_SEND);
+        myShareIntent.setType("text/plain");
+        myShareIntent.putExtra(Intent.EXTRA_SUBJECT, "I recommend you read book");
+        myShareIntent.putExtra(Intent.EXTRA_TEXT, "I recommend you read this book: \n" + volumeInfo.getTitle() + " \n" + volumeInfo.getPreviewLink());
+        startActivity(Intent.createChooser(myShareIntent, null));
     }
 
     private void deleteBook() {

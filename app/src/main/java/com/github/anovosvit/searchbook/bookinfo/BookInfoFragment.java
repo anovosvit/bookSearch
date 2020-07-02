@@ -2,6 +2,8 @@ package com.github.anovosvit.searchbook.bookinfo;
 
 import androidx.databinding.DataBindingUtil;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -32,8 +35,7 @@ public class BookInfoFragment extends Fragment implements BookItemClickListener 
     private boolean isFavorite;
 
     public static BookInfoFragment newInstance() {
-        BookInfoFragment bookInfoFragment = new BookInfoFragment();
-        return bookInfoFragment;
+        return new BookInfoFragment();
     }
 
     @Override
@@ -86,16 +88,29 @@ public class BookInfoFragment extends Fragment implements BookItemClickListener 
         switch (item.getItemId()) {
             case R.id.eventShare:
                 share();
-                return false;
+                return true;
             case R.id.addToCollection:
                 addToFavorite(volumeInfo);
+                return true;
+            case R.id.readBook:
+                goToRead();
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    private void goToRead() {
+        Intent readBookIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(volumeInfo.getPreviewLink()));
+        startActivity(readBookIntent);
+    }
+
     private void share() {
-        Toast.makeText(getContext(), "Share", Toast.LENGTH_SHORT).show();
+        Intent myShareIntent = new Intent();
+        myShareIntent.setAction(Intent.ACTION_SEND);
+        myShareIntent.setType("text/plain");
+        myShareIntent.putExtra(Intent.EXTRA_SUBJECT, "I recommend you read book");
+        myShareIntent.putExtra(Intent.EXTRA_TEXT, "I recommend you read this book: \n" + volumeInfo.getTitle() + " \n" + volumeInfo.getPreviewLink());
+        startActivity(Intent.createChooser(myShareIntent, null));
     }
 
     private void addToFavorite(VolumeInfo book) {

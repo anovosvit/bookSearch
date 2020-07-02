@@ -51,7 +51,6 @@ public class VolumeInfo {
     @Expose(serialize = false)
     private String category;
 
-
     @Ignore
     @SerializedName("categories")
     @Expose
@@ -80,6 +79,11 @@ public class VolumeInfo {
     @SerializedName("averageRating")
     @Expose
     private float averageRating;
+
+    @ColumnInfo(name = "previewLink")
+    @SerializedName("previewLink")
+    @Expose
+    private String previewLink;
 
     public String getTitle() {
         return title;
@@ -140,7 +144,7 @@ public class VolumeInfo {
     }
 
     public String getAuthor() {
-        String result = null;
+        String result;
         if (authors != null) {
             return getAuthorsString();
         } else {
@@ -205,7 +209,7 @@ public class VolumeInfo {
     }
 
     public String getImageLink() {
-        String result = null;
+        String result;
         if (getImageLinks() != null) {
             result = getImageLinks().getSmallThumbnail().replace("http://", "https://");
         } else {
@@ -217,4 +221,13 @@ public class VolumeInfo {
     public void setImageLink(String imageLink) {
         this.imageLink = imageLink;
     }
+
+    public String getPreviewLink() {
+        return previewLink;
+    }
+
+    public void setPreviewLink(String previewLink) {
+        this.previewLink = previewLink;
+    }
+
 }

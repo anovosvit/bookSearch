@@ -62,6 +62,7 @@ public class BookSearchFragment extends Fragment implements Model.OnFinishedList
         recyclerView = binding.bookSearchRecyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
+        recyclerView.setHasFixedSize(true);
 
         return binding.getRoot();
     }
@@ -87,6 +88,7 @@ public class BookSearchFragment extends Fragment implements Model.OnFinishedList
                     }
                     return true;
                 }
+
                 @Override
                 public boolean onQueryTextSubmit(String query) {
                     searchBook(query);
@@ -121,7 +123,7 @@ public class BookSearchFragment extends Fragment implements Model.OnFinishedList
     public void searchBook(String newText) {
         recyclerView.smoothScrollToPosition(0);
         binding.progress.setVisibility(View.VISIBLE);
-        viewModel.searchBooks(newText, "10", this);
+        viewModel.searchBooks(newText, "20", this);
         Log.i("onQueryText", newText);
     }
 

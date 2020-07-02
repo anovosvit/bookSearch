@@ -1,4 +1,4 @@
-package com.github.anovosvit.searchbook.recyclerview;
+package com.github.anovosvit.searchbook.animation;
 
 import android.view.animation.AnimationUtils;
 

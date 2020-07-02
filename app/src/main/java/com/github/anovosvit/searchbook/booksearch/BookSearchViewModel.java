@@ -32,5 +32,4 @@ public class BookSearchViewModel extends AndroidViewModel {
     public void searchBooks(String keyword, String pageCount, Model.OnFinishedListener listener) {
         repository.getBookList(keyword, pageCount, listener);
     }
-
 }

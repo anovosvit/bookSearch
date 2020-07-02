@@ -4,16 +4,21 @@
         xmlns:tools="http://schemas.android.com/tools"
         tools:context=".BookInfoFragment">
 
-    <item
-            android:id="@+id/eventShare"
-            android:icon="@drawable/ic_baseline_share_24"
-            android:title="Share"
-            app:showAsAction="always" />
 
     <item
             android:id="@+id/addToCollection"
             android:icon="@drawable/ic_baseline_add_24"
-            android:title="Add to Collection"
-            app:showAsAction="always" />
-   
+            android:title="@string/add_to_collection"
+            app:showAsAction="ifRoom" />
+
+    <item
+            android:id="@+id/eventShare"
+            android:icon="@drawable/ic_baseline_share_24"
+            android:title="@string/share"
+            app:showAsAction="ifRoom" />
+
+    <item
+            android:id="@+id/readBook"
+            android:title="@string/go_to_reading" />
+
 </menu>
