@@ -8,8 +8,8 @@
     <fragment
             android:id="@+id/bookSearchFragment"
             android:name="com.github.anovosvit.searchbook.booksearch.BookSearchFragment"
-            tools:layout="@layout/fragment_booksearch"
-            android:label="Search Book" >
+            android:label="Search Book"
+            tools:layout="@layout/fragment_booksearch">
         <action
                 android:id="@+id/action_bookSearchFragment_to_bookInfoFragment"
                 app:destination="@id/bookInfoFragment" />
@@ -23,7 +23,7 @@
             android:id="@+id/bookCollectionFragment"
             android:name="com.github.anovosvit.searchbook.bookcollection.BookCollectionFragment"
             android:label="Book Collection"
-            tools:layout="@layout/fragment_book_collection" >
+            tools:layout="@layout/fragment_book_collection">
 
         <action
                 android:id="@+id/action_bookCollectionFragment_to_bookInfoCollectionFragment"

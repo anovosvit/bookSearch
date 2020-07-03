@@ -29,6 +29,11 @@
     <string name="share">Share</string>
     <string name="remove_from_collection">Remove from Collection</string>
     <string name="send_feedback">Send feedback</string>
+    <string name="feedback">Hello, dear user. \n\n
+            Thank you for your attention to the Book Search Application.
+            It works based on the Google Book API. \n\n
+            If you have thoughts on how to make this application better,
+        then send feedback via the button below.</string>
 
     <!--    Nav drawer  -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -40,6 +45,5 @@
     <string name="general">General</string>
     <string name="search_book">Search Book</string>
     <string name="book_collection">Book Collection</string>
-    <string name="feedback">Feedback</string>
 
 </resources>
