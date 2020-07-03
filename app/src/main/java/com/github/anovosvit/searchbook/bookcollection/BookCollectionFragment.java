@@ -45,9 +45,10 @@ public class BookCollectionFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         viewModel.getAllFavBooks().observe(getViewLifecycleOwner(), volumesInfo -> {
-            if (volumesInfo != null && volumesInfo.size() != 0) {
+            if (volumesInfo != null || volumesInfo.size() != 0) {
                 adapter.setBooks(volumesInfo);
                 adapter.notifyDataSetChanged();
+                binding.bookCollectionInfoText.setVisibility(View.GONE);
             } else {
                 binding.bookCollectionInfoText.setVisibility(View.VISIBLE);
             }
