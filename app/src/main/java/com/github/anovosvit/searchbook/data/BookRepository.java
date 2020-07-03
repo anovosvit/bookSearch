@@ -9,10 +9,10 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.github.anovosvit.searchbook.data.database.BookDao;
 import com.github.anovosvit.searchbook.data.database.BookRoomDatabase;
-import com.github.anovosvit.searchbook.data.http.Model;
 import com.github.anovosvit.searchbook.data.http.NetworkService;
 import com.github.anovosvit.searchbook.data.model.BooksResponse;
 import com.github.anovosvit.searchbook.data.model.VolumeInfo;
+import com.github.anovosvit.searchbook.listeners.Model;
 
 import java.util.List;
 
@@ -65,7 +65,7 @@ public class BookRepository {
     }
 
     public void getBookList(String keyword, String pageCount, Model.OnFinishedListener onFinishedListener) {
-        Log.i("Fragment", "Сейчас будет отправляться запрос");
+
         NetworkService.getInstance()
                 .getBookSearchApi()
                 .searchBooks(keyword, pageCount)
@@ -73,7 +73,6 @@ public class BookRepository {
                     @Override
                     public void onResponse(Call<BooksResponse> call, Response<BooksResponse> response) {
                         if (response.body() != null) {
-                            Log.i("TAG", "Зашло в репозиторий");
                             booksResponseLiveData.postValue(response.body());
                             onFinishedListener.onFinished();
                         }

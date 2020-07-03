@@ -1,4 +1,4 @@
-package com.github.anovosvit.searchbook.bookinfo;
+package com.github.anovosvit.searchbook.listeners;
 
 import com.github.anovosvit.searchbook.data.model.VolumeInfo;
 

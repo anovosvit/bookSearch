@@ -29,7 +29,7 @@ public class BookCollectionFragment extends Fragment {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        adapter = BookCollectionAdapter.getInstance();
+        adapter = new BookCollectionAdapter();
         setHasOptionsMenu(true);
         viewModel = new ViewModelProvider(this).get(BookCollectionViewModel.class);
 
@@ -44,9 +44,9 @@ public class BookCollectionFragment extends Fragment {
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
 
-        viewModel.getAllFavBooks().observe(getViewLifecycleOwner(), volumeInfos -> {
-            if (volumeInfos != null || volumeInfos.size() != 0) {
-                adapter.setBooks(volumeInfos);
+        viewModel.getAllFavBooks().observe(getViewLifecycleOwner(), volumesInfo -> {
+            if (volumesInfo != null && volumesInfo.size() != 0) {
+                adapter.setBooks(volumesInfo);
                 adapter.notifyDataSetChanged();
             } else {
                 binding.bookCollectionInfoText.setVisibility(View.VISIBLE);

@@ -24,7 +24,7 @@ import android.widget.Toast;
 
 import com.github.anovosvit.searchbook.R;
 import com.github.anovosvit.searchbook.databinding.FragmentBooksearchBinding;
-import com.github.anovosvit.searchbook.data.http.Model;
+import com.github.anovosvit.searchbook.listeners.Model;
 
 public class BookSearchFragment extends Fragment implements Model.OnFinishedListener {
 
@@ -45,7 +45,7 @@ public class BookSearchFragment extends Fragment implements Model.OnFinishedList
 
         viewModel.init();
         viewModel.getVolumesResponseLiveData().observe(this, booksResponse -> {
-            if (booksResponse != null || booksResponse.getItems() != null) {
+            if (booksResponse != null && booksResponse.getItems() != null) {
                 binding.booksImage.setVisibility(View.GONE);
                 adapter.setmData(booksResponse.getItems());
             } else {
@@ -77,8 +77,8 @@ public class BookSearchFragment extends Fragment implements Model.OnFinishedList
             searchView = (SearchView) searchItem.getActionView();
         }
 
-        if (searchView != null) {
-            searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+        if (searchView != null && searchManager != null) {
+                searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
             searchView.setQueryHint(getString(R.string.query_hint));
             queryTextListener = new SearchView.OnQueryTextListener() {
                 @Override

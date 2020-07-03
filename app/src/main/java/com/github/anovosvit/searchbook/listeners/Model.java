@@ -1,4 +1,4 @@
-package com.github.anovosvit.searchbook.data.http;
+package com.github.anovosvit.searchbook.listeners;
 
 
 public interface Model {

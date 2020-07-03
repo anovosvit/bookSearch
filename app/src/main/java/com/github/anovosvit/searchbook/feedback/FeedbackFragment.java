@@ -6,13 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
 
 import com.github.anovosvit.searchbook.R;
 import com.github.anovosvit.searchbook.databinding.FragmentFeedbackBinding;
+import com.github.anovosvit.searchbook.utils.Helper;
 
 public class FeedbackFragment extends Fragment {
 
@@ -30,15 +31,9 @@ public class FeedbackFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_feedback, container, false);
 
-        binding.button.setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_SENDTO);
-            intent.setType("text/plain");
-            intent.putExtra(Intent.EXTRA_EMAIL, "novosvit_alyona@mail.ru");
-            intent.putExtra(Intent.EXTRA_SUBJECT, "Book Search Application Feedback");
-            intent.putExtra(Intent.EXTRA_TEXT, "Hello, Alyona! I used the book search app you wrote.");
-
-            startActivity(Intent.createChooser(intent, "Send Email"));
-        });
+        binding.button.setOnClickListener(v ->
+                startActivity(Intent.createChooser(Helper.sendFeedback(), "Send Email"))
+        );
         return binding.getRoot();
     }
 }

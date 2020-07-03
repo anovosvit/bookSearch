@@ -8,13 +8,11 @@ import androidx.databinding.DataBindingUtil;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.CenterCrop;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.github.anovosvit.searchbook.R;
 import com.github.anovosvit.searchbook.bookinfo.BookInfoCollectionFragment;
-import com.github.anovosvit.searchbook.databinding.ItemCollectionBinding;
 import com.github.anovosvit.searchbook.data.model.VolumeInfo;
+import com.github.anovosvit.searchbook.databinding.ItemCollectionBinding;
+import com.github.anovosvit.searchbook.utils.Helper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +20,6 @@ import java.util.List;
 public class BookCollectionAdapter extends RecyclerView.Adapter<BookCollectionAdapter.BookCollectionViewHolder> {
 
     private List<VolumeInfo> books = new ArrayList<>();
-    private static BookCollectionAdapter instance;
 
     public List<VolumeInfo> getBooks() {
         return books;
@@ -30,13 +27,6 @@ public class BookCollectionAdapter extends RecyclerView.Adapter<BookCollectionAd
 
     public void setBooks(List<VolumeInfo> books) {
         this.books = books;
-    }
-
-    public static BookCollectionAdapter getInstance() {
-        if (instance == null) {
-            instance = new BookCollectionAdapter();
-        }
-        return instance;
     }
 
     @NonNull
@@ -54,12 +44,7 @@ public class BookCollectionAdapter extends RecyclerView.Adapter<BookCollectionAd
         holder.itemBinding.executePendingBindings();
 
         if (book.getImageLink() != null) {
-            String imageUrl = book.getImageLink();
-
-            Glide.with(holder.itemView)
-                    .load(imageUrl)
-                    .transform(new CenterCrop(), new RoundedCorners(16))
-                    .into(holder.itemBinding.coverImageCollection);
+            Helper.uploadImage(holder.itemView, book.getImageLink(), holder.itemBinding.coverImageCollection);
         }
 
         holder.itemBinding.setItemClickListener(v -> {

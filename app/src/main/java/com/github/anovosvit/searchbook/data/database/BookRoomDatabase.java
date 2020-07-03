@@ -19,14 +19,12 @@ public abstract class BookRoomDatabase extends RoomDatabase {
         if (INSTANCE == null) {
             synchronized (BookRoomDatabase.class) {
                 if (INSTANCE == null) {
-                    // Create database here
+
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             BookRoomDatabase.class, "book_database")
                             // Wipes and rebuilds instead of migrating if no Migration object.
-                            // Migration is not part of this practical.
                             .fallbackToDestructiveMigration()
                             .build();
-
                 }
             }
         }

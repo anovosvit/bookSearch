@@ -7,7 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.github.anovosvit.searchbook.data.BookRepository;
-import com.github.anovosvit.searchbook.data.http.Model;
+import com.github.anovosvit.searchbook.listeners.Model;
 import com.github.anovosvit.searchbook.data.model.BooksResponse;
 
 public class BookSearchViewModel extends AndroidViewModel {

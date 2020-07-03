@@ -45,5 +45,7 @@
     <string name="general">General</string>
     <string name="search_book">Search Book</string>
     <string name="book_collection">Book Collection</string>
+    <string name="feedback_menu">Feedback</string>
+    <string name="communicate">Communicate</string>
 
 </resources>

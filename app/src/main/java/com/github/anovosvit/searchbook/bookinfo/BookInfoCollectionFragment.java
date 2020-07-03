@@ -1,7 +1,5 @@
 package com.github.anovosvit.searchbook.bookinfo;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,12 +15,11 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.CenterCrop;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.github.anovosvit.searchbook.R;
 import com.github.anovosvit.searchbook.data.model.VolumeInfo;
 import com.github.anovosvit.searchbook.databinding.BookInfoFragmentBinding;
+import com.github.anovosvit.searchbook.listeners.BookItemClickListener;
+import com.github.anovosvit.searchbook.utils.Helper;
 
 public class BookInfoCollectionFragment extends Fragment implements BookItemClickListener {
 
@@ -58,12 +55,7 @@ public class BookInfoCollectionFragment extends Fragment implements BookItemClic
         });
 
         if (volumeInfo.getImageLink() != null) {
-            String imageUrl = volumeInfo.getImageLink();
-
-            Glide.with(this)
-                    .load(imageUrl)
-                    .transform(new CenterCrop(), new RoundedCorners(16))
-                    .into(binding.coverBookImageView);
+            Helper.uploadImage(this, volumeInfo.getImageLink(), binding.coverBookImageView);
         }
 
         return binding.getRoot();
@@ -71,7 +63,7 @@ public class BookInfoCollectionFragment extends Fragment implements BookItemClic
 
     @Override
     public void onBookItemClick(VolumeInfo volumeInfo) {
-        this.volumeInfo = volumeInfo;
+        BookInfoCollectionFragment.volumeInfo = volumeInfo;
     }
 
     @Override
@@ -87,27 +79,13 @@ public class BookInfoCollectionFragment extends Fragment implements BookItemClic
                 deleteBook();
                 return true;
             case R.id.eventShare:
-                share();
+                startActivity(Helper.shareBookInfo(volumeInfo));
                 return true;
             case R.id.readBook:
-                goToRead();
+                startActivity(Helper.goToRead(volumeInfo));
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void goToRead() {
-        Intent readBookIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(volumeInfo.getPreviewLink()));
-        startActivity(readBookIntent);
-    }
-
-    private void share() {
-        Intent myShareIntent = new Intent();
-        myShareIntent.setAction(Intent.ACTION_SEND);
-        myShareIntent.setType("text/plain");
-        myShareIntent.putExtra(Intent.EXTRA_SUBJECT, "I recommend you read book");
-        myShareIntent.putExtra(Intent.EXTRA_TEXT, "I recommend you read this book: \n" + volumeInfo.getTitle() + " \n" + volumeInfo.getPreviewLink());
-        startActivity(Intent.createChooser(myShareIntent, null));
     }
 
     private void deleteBook() {

@@ -23,13 +23,13 @@
         </menu>
     </item>
 
-    <item android:title="Communicate">
+    <item android:title="@string/communicate">
         <menu>
             <group android:checkableBehavior="single">
                 <item
                         android:id="@+id/feedbackFragment"
                         android:icon="@drawable/ic_send"
-                        android:title="@string/feedback" />
+                        android:title="@string/feedback_menu" />
             </group>
         </menu>
     </item>
