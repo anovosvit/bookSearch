@@ -15,7 +15,7 @@ Android application that allows you to search and save books in your local colle
 * Glide
 
 ## [Screenshots](https://github.com/anovosvit/bookSearch/tree/master/screenshots)
-<p><img src="https://github.com/anovosvit/bookSearch/blob/master/screenshots/search_result.jpeg" width="200px" hspace="20"/> 
-<img src="https://github.com/anovosvit/bookSearch/blob/master/screenshots/book_info.jpeg" width="200px" hspace="20"/>
-<img src="https://github.com/anovosvit/bookSearch/blob/master/screenshots/nav_drawer.jpeg" width="200px" hspace="20"/>
-<img src="https://github.com/anovosvit/bookSearch/blob/master/screenshots/collection.jpeg" width="200px" hspace="20"/> </p>
+<p><img src="https://github.com/anovosvit/bookSearch/blob/master/screenshots/search_result.jpeg" width="200px" hspace="2"/> 
+<img src="https://github.com/anovosvit/bookSearch/blob/master/screenshots/book_info.jpeg" width="200px" hspace="2"/>
+<img src="https://github.com/anovosvit/bookSearch/blob/master/screenshots/nav_drawer.jpeg" width="200px" hspace="2"/>
+<img src="https://github.com/anovosvit/bookSearch/blob/master/screenshots/collection.jpeg" width="200px" hspace="2"/> </p>
